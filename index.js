@@ -15,24 +15,10 @@ app.use(morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
 }));
 
 app.use(cors());
-/*  */
-
-// Some fake data
-const books = [
-  {
-    title: "Harry Potter and the Sorcerer's stone",
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-];
 
 // The GraphQL schema in string form
 const typeDefs = require('./typeDefinitions');
 const resolvers = require('./resolvers/index');
-
 
 // Put together a schema
 const schema = makeExecutableSchema({

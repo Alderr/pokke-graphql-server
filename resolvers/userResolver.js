@@ -1,19 +1,16 @@
-// Some fake data
-const books = [
-  {
-    title: "Harry Potter and the Sorcerer's stone",
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park!!!!',
-    author: 'Michael Crichton',
-  },
-];
+const UserModel = require('../models/UserModel');
 
 module.exports = {
   Query: {
-    books: () => books,
+    users: () => {
+        return UserModel.find()
+            .then((users) => {
+                return users.map((user) => user.serialize());
+            });
+    },
   },
-  Mutations: {},
-  Subscriptions: {},
+  Mutations: {
+      createUser: () => 1,
+  },
+//   Subscriptions: {},
 };

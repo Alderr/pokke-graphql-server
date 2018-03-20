@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { Schema } = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
-  firstName: { type: String },
-  lastName: { type: String },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   log: [
     {
       date: { type: Number, default: Date.now() },
@@ -23,7 +24,7 @@ const UserSchema = mongoose.Schema({
   apiKeys: [
     {
       date: { type: Number, default: Date.now() },
-      key: { type: String, required: true },
+      key: { type: Schema.Types.ObjectId, ref: 'Users', required: true },
     },
   ],
 });
