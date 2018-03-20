@@ -1,4 +1,4 @@
-# Thinkful Backend Template
+# An Amazing Backend Template =]
 
 A template for developing and deploying Node.js apps.
 
