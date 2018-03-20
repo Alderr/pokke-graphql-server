@@ -36,6 +36,10 @@ module.exports = `
       users: [User],
       apiKeys: [ApiKey], 
     }
+    
+    type CreateApiKey_Payload {
+        _id: ID!
+    }
 
     type CreateLog_Payload {
         _id: ID!
@@ -45,7 +49,7 @@ module.exports = `
       createUser(username: String!, password: String!, firstName: String!, lastName: String!): User,
       addKeyToUser(_id: String!): User,
       deleteUser(_id: String!): User,
-      createApiKey(userId: String!, key: String!): ApiKey,
+      createApiKey(userId: String!, key: String!): CreateApiKey_Payload,
       createLog(_id: String!, message: String!, contacts: [String]): CreateLog_Payload, 
     }
 
