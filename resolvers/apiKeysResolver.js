@@ -1,7 +1,7 @@
 module.exports = {
   Query: {
-      getKey: 3
+    // keys: () => [],
   },
-  Mutation: {},
-  Subscription: {},
+//   Mutations: {},
+//   Subscriptions: {},
 };

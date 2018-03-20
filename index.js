@@ -31,13 +31,8 @@ const books = [
 
 // The GraphQL schema in string form
 const typeDefs = require('./typeDefinitions');
-const otherResolvers = require('./resolvers/index');
-console.log(otherResolvers);
+const resolvers = require('./resolvers/index');
 
-// The resolvers
-const resolvers = {
-  Query: { books: () => books },
-};
 
 // Put together a schema
 const schema = makeExecutableSchema({
