@@ -39,7 +39,7 @@ UserSchema.statics.hashPassword = function (password) {
 
 UserSchema.methods.serialize = function () {
   return {
-    id: this._id,
+    _id: this._id,
     username: this.username,
     password: this.password,
     firstName: this.firstName,

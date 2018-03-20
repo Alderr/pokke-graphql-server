@@ -2,6 +2,6 @@ module.exports = {
   Query: {
     apiKeys: () => [],
   },
-  Mutations: {},
+  Mutation: {},
 //   Subscriptions: {},
 };

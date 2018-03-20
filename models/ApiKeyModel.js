@@ -10,7 +10,7 @@ const ApiKeySchema = new Schema({
 
 ApiKeySchema.methods.serialize = function () {
   return {
-    id: this._id,
+    _id: this._id,
     key: this.key,
     user: this.user,
     usage: this.usage,

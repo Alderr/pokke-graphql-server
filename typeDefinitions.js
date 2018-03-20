@@ -37,8 +37,9 @@ module.exports = `
       apiKeys: [ApiKey], 
     }
 
-    type Mutations { 
+    type Mutation { 
       createUser(username: String!, password: String!, firstName: String!, lastName: String!): User,
+      deleteUser(id: String!): User,
       createApiKey(userId: String!, key: String!): ApiKey,
       createLog(message: String!, email: String, phoneNumber: String): Log, 
     }

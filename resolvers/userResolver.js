@@ -2,15 +2,23 @@ const UserModel = require('../models/UserModel');
 
 module.exports = {
   Query: {
-    users: () => {
-        return UserModel.find()
-            .then((users) => {
-                return users.map((user) => user.serialize());
-            });
+    users: () => UserModel.find().then((users) => users.map((user) => user.serialize())),
+  },
+  Mutation: {
+    createUser: (_, { firstName, lastName, username, password }) => {
+    // creating user! 
+    return UserModel.create({firstName, lastName, username, password})
+        .then((data) => {
+          console.log(data);
+          return data;
+        });
     },
+    deleteUser: (_, { _id }) => {
+        return UserModel.findByIdAndRemove(_id)
+            .then((response) => {
+                console.log(response);
+                return response;
+            });
+    }
   },
-  Mutations: {
-      createUser: () => 1,
-  },
-//   Subscriptions: {},
 };
