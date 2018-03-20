@@ -21,12 +21,7 @@ const UserSchema = new Schema({
       ],
     },
   ],
-  apiKeys: [
-    {
-      date: { type: Number, default: Date.now() },
-      key: { type: Schema.Types.ObjectId, ref: 'ApiKeys' },
-    },
-  ],
+  apiKeys: [{ type: Schema.Types.ObjectId, ref: 'ApiKeys' }],
 });
 
 UserSchema.methods.validatePassword = function (password) {

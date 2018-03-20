@@ -9,14 +9,14 @@ module.exports = `
       username: String!, 
       firstName: String!,
       lastName: String!, 
-      logs: [Log!]
+      log: [Log!]
       apiKeys: [ApiKey!]
     }
 
     type ApiKey {
         _id: ID!,
         key: String!
-        user: User!
+        usage: Int!
     }
 
     type Log {
@@ -37,12 +37,16 @@ module.exports = `
       apiKeys: [ApiKey], 
     }
 
+    type CreateLog_Payload {
+        _id: ID!
+    }
+
     type Mutation { 
       createUser(username: String!, password: String!, firstName: String!, lastName: String!): User,
       addKeyToUser(_id: String!): User,
       deleteUser(_id: String!): User,
       createApiKey(userId: String!, key: String!): ApiKey,
-      createLog(message: String!, email: String, phoneNumber: String): Log, 
+      createLog(_id: String!, message: String!, contacts: [String]): CreateLog_Payload, 
     }
 
 `;
