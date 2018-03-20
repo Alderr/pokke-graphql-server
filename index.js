@@ -1,19 +1,15 @@
-'use strict';
-
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const { PORT, CLIENT_ORIGIN } = require('./config');
+const { PORT } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
-const app = express();  
+const app = express();
 
-app.use(
-  morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
-    skip: (req, res) => process.env.NODE_ENV === 'test'
-  })
-);
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
+  skip: (req, res) => process.env.NODE_ENV === 'test',
+}));
 
 app.use(cors());
 
@@ -22,7 +18,7 @@ function runServer(port = PORT) {
     .listen(port, () => {
       console.info(`App listening on port ${server.address().port}`);
     })
-    .on('error', err => {
+    .on('error', (err) => {
       console.error('Express failed to start');
       console.error(err);
     });
