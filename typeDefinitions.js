@@ -1,11 +1,11 @@
 module.exports = `    
     type User { 
-      _id: ID!,
-      username: String!, 
-      firstName: String!,
-      lastName: String!, 
-      logs: [Logs!]
-      apiKeys: [ApiKey!]
+        _id: ID!
+        username: String!
+        firstName: String!
+        lastName: String!
+        logs: [Logs!]
+        apiKeys: [ApiKey!]
     }
 
     type ApiKey {
@@ -15,9 +15,9 @@ module.exports = `
     }
 
     type Logs {
-        _id: ID!,
-        date: String!,
-        message: String!,
+        _id: ID!
+        date: String!
+        message: String!
         contacts: [Contact!]
     }
 
@@ -27,24 +27,37 @@ module.exports = `
     }
 
     type Query { 
-      users: [User],
-      apiKeys: [ApiKey], 
+        users: [User],
+        apiKeys: [ApiKey], 
     }
 
     type CreateApiKey_Payload {
-        _id: ID!
+        _id: ID
     }
 
     type CreateLog_Payload {
-        _id: ID!
+        _id: ID
+    }
+
+    input CreateUserInput {
+        username: String!
+        password: String!
+        firstName: String!
+        lastName: String!
+    }
+
+    input CreateLogInput {
+        username: String!
+        password: String!
+        firstName: String!
+        lastName: String!
     }
 
     type Mutation { 
-      createUser(username: String!, password: String!, firstName: String!, lastName: String!): User,
-      addKeyToUser(_id: String!): User,
-      deleteUser(_id: String!): User,
-      createApiKey(userId: String!, key: String!): CreateApiKey_Payload,
-      createLog(_id: String!, message: String!, contacts: [String]): CreateLog_Payload, 
+        createUser(input: CreateUserInput!): User
+        deleteUser(_id: String!): User
+        addKeyToUser(_id: String!): User
+        createLog(_id: String!, message: String!, contacts: [String]): CreateLog_Payload
     }
 
 `;

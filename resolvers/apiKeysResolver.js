@@ -1,4 +1,4 @@
-const ApiKeyModel = require("../models/ApiKeyModel");
+const ApiKeyModel = require('../models/ApiKeyModel');
 
 
 module.exports = {
