@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
-const { makeExecutableSchema } = require("graphql-tools");
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
 
 const { PORT } = require('./config');
 const { dbConnect } = require('./db-mongoose');
@@ -30,10 +30,9 @@ const books = [
 ];
 
 // The GraphQL schema in string form
-const typeDefs = `
-  type Query { books: [Book] }
-  type Book { title: String, author: String }
-`;
+const typeDefs = require('./typeDefinitions');
+const otherResolvers = require('./resolvers/index');
+console.log(otherResolvers);
 
 // The resolvers
 const resolvers = {
