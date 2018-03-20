@@ -60,11 +60,11 @@ module.exports = {
         });
     },
     createLog: (_, { _id, message, contacts }) => {
-      return UserModel.findById(_id, 'log')
+      return UserModel.findById(_id, 'logs')
         .then((user) => {
           console.log('user', user);
 
-          const newLogObj = {
+          const newLogsObj = {
             message,
             contacts: contacts.map((contact) => {
               if (contact.includes('@')) {
@@ -79,8 +79,8 @@ module.exports = {
             }),
           };
 
-          user.log = [...user.log, newLogObj];
-          console.log('user===log', user.log);
+          user.logs = [...user.logs, newLogsObj];
+          console.log('user===log', user.logs);
           return user.save();
         })
         .then((response) => {

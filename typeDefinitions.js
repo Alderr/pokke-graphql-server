@@ -1,15 +1,10 @@
 module.exports = `    
-    type Book { 
-      title: String, 
-      author: String 
-    }
-
     type User { 
       _id: ID!,
       username: String!, 
       firstName: String!,
       lastName: String!, 
-      log: [Log!]
+      logs: [Logs!]
       apiKeys: [ApiKey!]
     }
 
@@ -19,7 +14,7 @@ module.exports = `
         usage: Int!
     }
 
-    type Log {
+    type Logs {
         _id: ID!,
         date: String!,
         message: String!,
@@ -32,11 +27,10 @@ module.exports = `
     }
 
     type Query { 
-      books: [Book],
       users: [User],
       apiKeys: [ApiKey], 
     }
-    
+
     type CreateApiKey_Payload {
         _id: ID!
     }
