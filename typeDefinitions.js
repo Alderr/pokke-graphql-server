@@ -47,10 +47,9 @@ module.exports = `
     }
 
     input CreateLogInput {
-        username: String!
-        password: String!
-        firstName: String!
-        lastName: String!
+        id: String!
+        message: String!
+        contacts: [String!]!
     }
 
     type Mutation { 
