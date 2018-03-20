@@ -24,7 +24,7 @@ const UserSchema = new Schema({
   apiKeys: [
     {
       date: { type: Number, default: Date.now() },
-      key: { type: Schema.Types.ObjectId, ref: 'Users', required: true },
+      key: { type: Schema.Types.ObjectId, ref: 'ApiKeys' },
     },
   ],
 });
