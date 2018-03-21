@@ -49,7 +49,7 @@ module.exports = `
     }
 
     type ApiKey_Payload {
-        _id: ID  
+        _id: ID 
     }
 
     input SignInInput {
