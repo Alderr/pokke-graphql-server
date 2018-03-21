@@ -40,6 +40,15 @@ module.exports = `
         logs: [Logs]    
     }
 
+    type Auth_Payload {
+        authToken: String!   
+    }
+
+    input SignInInput {
+        username: String!
+        password: String!
+    }
+
     input CreateUserInput {
         username: String!
         password: String!
@@ -53,6 +62,8 @@ module.exports = `
         contacts: [String!]!
     }
 
+
+
     type Mutation { 
         createUser(input: CreateUserInput!): User
         deleteUser(_id: String!): User
@@ -62,6 +73,8 @@ module.exports = `
 
         incrementUsage (_id: String!): ApiKey
         resetUsage (_id: String!): ApiKey
+
+        signIn(input: SignInInput!): Auth_Payload
     }
 
 `;
