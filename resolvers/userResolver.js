@@ -93,13 +93,14 @@ module.exports = {
       console.log('​-----------------------------');
       console.log('​apiKeyId', apiKeyId);
       console.log('​-----------------------------');
-
+      let userData;
       return requireAuth(user)
-        .then((user) => {
-          const newApiKeysArr = user.apiKeys.filter(key => !(JSON.stringify(key).replace(/\"/g, '') === apiKeyId));
+        .then((response) => {
+          userData = response;
+          const newApiKeysArr = userData.apiKeys.filter(key => !(JSON.stringify(key).replace(/\"/g, '') === apiKeyId));
 
-          user.apiKeys = [...newApiKeysArr];
-          return user.save();
+          userData.apiKeys = [...newApiKeysArr];
+          return userData.save();
         })
         .then((response) => {
           console.log(response);
