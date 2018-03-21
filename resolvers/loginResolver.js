@@ -37,9 +37,9 @@ module.exports = {
   Mutation: {
     signIn: (_, { input }, context) => {
       const { username, password } = input;
-      console.log('​-----------------');
-      console.log('​context', context);
-      console.log('​-----------------');
+      console.log('​---------------------------------------');
+      console.log('​username, password', username, password);
+      console.log('​---------------------------------------');
 
       return localAuth(username, password);
     },

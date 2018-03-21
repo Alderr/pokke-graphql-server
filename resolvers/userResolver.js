@@ -32,12 +32,18 @@ module.exports = {
   },
   Mutation:
   {
-    createUser: (_, { input }) =>
-      UserModel.create(input)
+    createUser: (_, { input }) => {
+      // { firstName, lastName, username, password } = input;
+      const args = input;
+
+      args.password = UserModel.hashPassword(input.password);
+
+      return UserModel.create(args)
         .then((response) => {
           console.log(response);
           return response;
-        }),
+        });
+    },
     deleteUser: (_, { _id }) =>
       UserModel.findByIdAndRemove(_id)
         .then((response) => {
