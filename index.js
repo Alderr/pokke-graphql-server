@@ -41,7 +41,7 @@ app.use((req, res, next) => {
     try {
       // verdict is a decoded obj of the user
       verdict = jwt.verify(authToken, JWT_SECRET);
-      req.user = verdict;
+      req.user = verdict.user;
 
       console.log('​-----------------');
       console.log('​verdict auth', verdict);

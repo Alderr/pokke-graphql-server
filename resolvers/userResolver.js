@@ -1,6 +1,7 @@
+const uuidv4 = require('uuid/v4');
 const UserModel = require('../models/UserModel');
 const ApiKeyModel = require('../models/ApiKeyModel');
-const uuidv4 = require('uuid/v4');
+const requireAuth = require('../services/authRequired');
 
 function phoneNumberCheck(str) {
   return /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(str);
@@ -34,7 +35,7 @@ module.exports = {
   {
     createUser: (_, { input }) => {
       // { firstName, lastName, username, password } = input;
-      
+
       const args = input;
 
       return UserModel.hashPassword(input.password)
@@ -47,13 +48,19 @@ module.exports = {
           return response;
         });
     },
-    deleteUser: (_, { _id }) =>
-      UserModel.findByIdAndRemove(_id)
+    deleteUser: (_, { _id }, user) => {
+      /*
+      Delete all user info when requested!
+      */
+      const { id } = requireAuth(user);
+
+      return UserModel.findByIdAndRemove(id)
         .then((response) => {
           console.log(response);
           return response;
-        }),
-    addApiKey: (_, { _id }) => {
+        });
+    },
+    addApiKey: (_, { _id }, user) => {
       /*
         > find User
         > create api key using uuid
@@ -62,8 +69,11 @@ module.exports = {
       */
 
       let userData;
-
-      return UserModel.findById(_id, 'apiKeys')
+      //const { id } = requireAuth(user);
+      return requireAuth(user)
+        .then((userObj) => {
+          return UserModel.findById(id, "apiKeys");
+        })
         .then((user) => {
           userData = user;
           const apiKey = uuidv4();
