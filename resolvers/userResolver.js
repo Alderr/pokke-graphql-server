@@ -32,10 +32,7 @@ module.exports = {
   },
   Mutation:
   {
-    createUser: (_, { input }, context) => {
-      console.log('​-----------------');
-      console.log('​context', context);
-      console.log('​-----------------');
+    createUser: (_, { input }) => {
       // { firstName, lastName, username, password } = input;
       
       const args = input;
