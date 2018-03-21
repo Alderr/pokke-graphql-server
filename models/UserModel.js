@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const { Schema } = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { JWT_SECRET, JWT_EXPIRY } = require('../config');
 
 mongoose.Promise = global.Promise;
 
@@ -27,6 +29,17 @@ const UserSchema = new Schema({
 UserSchema.methods.validatePassword = password => bcrypt.compare(password, this.password);
 
 UserSchema.statics.hashPassword = password => bcrypt.hash(password, 10);
+
+UserSchema.methods.generateToken = () => {
+  console.log(this);
+
+  return jwt.sign(this, JWT_SECRET, {
+    subject: this.username,
+    expiresIn: JWT_EXPIRY,
+    algorithm: 'HS256',
+  });
+};
+
 
 UserSchema.methods.serialize = () => ({
   _id: this._id,

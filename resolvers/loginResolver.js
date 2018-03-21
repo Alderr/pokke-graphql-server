@@ -6,7 +6,7 @@ function localAuth(username, password) {
     .then((user) => {
       if (user) {
         if (user.validatePassword(password)) {
-          return user;
+          return { authToken: user.generateToken() };
         }
 
         return new Error('Incorrect credentials.');
@@ -15,22 +15,18 @@ function localAuth(username, password) {
       return new Error('Incorrect credentials.');
     });
 }
+
 module.exports = {
   Query: {
     signIn: (_, { input }, context) => {
-      /*
-      > see if user exists?
-      > see if password matches when unencrypted
-      > ==> if true - give valid token
-      > ==> if false - send err: invalid credentials
-      */
+      const { username, password } = input;
       console.log('​-----------------');
       console.log('​context', context);
       console.log('​-----------------');
 
-      return null;
+      return localAuth(username, password);
     },
   },
   Mutation: {
   },
-};
+}; 
