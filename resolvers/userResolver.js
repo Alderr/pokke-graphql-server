@@ -36,9 +36,11 @@ module.exports = {
       // { firstName, lastName, username, password } = input;
       const args = input;
 
-      args.password = UserModel.hashPassword(input.password);
-
-      return UserModel.create(args)
+      return UserModel.hashPassword(input.password)
+        .then((hashedPassword) => {
+          args.password = hashedPassword;
+          return UserModel.create(args);
+        })
         .then((response) => {
           console.log(response);
           return response;
