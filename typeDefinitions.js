@@ -71,7 +71,7 @@ module.exports = `
  
     type Mutation { 
         createUser(input: CreateUserInput!): User
-        deleteUser(_id: String!): User
+        deleteUser(input: String): User
         addApiKey(input: String): ApiKey_Payload
         deleteApiKey(apiKeyId: String!): ApiKey_Payload
         createLog(input: CreateLogInput!): CreateLog_Payload

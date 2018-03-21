@@ -48,13 +48,17 @@ module.exports = {
           return response;
         });
     },
-    deleteUser: (_, { _id }, user) => {
+    deleteUser: (_, __, user) => {
       /*
       Delete all user info when requested!
       */
-      const { id } = requireAuth(user);
+      let userData;
 
-      return UserModel.findByIdAndRemove(id)
+      return requireAuth(user)
+        .then((response) => {
+          userData = response;
+          return UserModel.findByIdAndRemove(userData.id);
+        })
         .then((response) => {
           console.log(response);
           return response;
