@@ -59,6 +59,9 @@ module.exports = `
         addApiKey(_id: String!): User
         deleteApiKey(_id: String!, apiKeyId: String!): User
         createLog(input: CreateLogInput!): CreateLog_Payload
+
+        incrementUsage (_id: String!): ApiKey
+        resetUsage (_id: String!): ApiKey
     }
 
 `;

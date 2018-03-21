@@ -113,7 +113,6 @@ module.exports = {
           return user.save();
         })
         .then((response) => {
-          console.log('===RESPONSE===');
           console.log(response);
           return response;
         })
