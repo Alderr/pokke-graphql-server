@@ -24,25 +24,19 @@ const UserSchema = new Schema({
   apiKeys: [{ type: Schema.Types.ObjectId, ref: 'ApiKeys' }],
 });
 
-UserSchema.methods.validatePassword = function (password) {
-  return bcrypt.compare(password, this.password);
-};
+UserSchema.methods.validatePassword = password => bcrypt.compare(password, this.password);
 
-UserSchema.statics.hashPassword = function (password) {
-  return bcrypt.hash(password, 10);
-};
+UserSchema.statics.hashPassword = password => bcrypt.hash(password, 10);
 
-UserSchema.methods.serialize = function () {
-  return {
-    _id: this._id,
-    username: this.username,
-    password: this.password,
-    firstName: this.firstName,
-    lastName: this.lastName,
-    log: this.log,
-    apiKeys: this.apiKeys,
-  };
-};
+UserSchema.methods.serialize = () => ({
+  _id: this._id,
+  username: this.username,
+  password: this.password,
+  firstName: this.firstName,
+  lastName: this.lastName,
+  log: this.log,
+  apiKeys: this.apiKeys,
+});
 
 const UserModel = mongoose.model('Users', UserSchema);
 
