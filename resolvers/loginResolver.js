@@ -21,7 +21,7 @@ function localAuth(username, password) {
       console.log('​------------------------------');
 
       if (verdict) {
-        return tempUser.generateToken();
+        return { authToken: tempUser.generateToken() };
       }
 
       return new Error('Incorrect credentials.');

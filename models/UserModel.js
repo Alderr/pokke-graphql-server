@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { Schema } = require('mongoose');
 const { JWT_SECRET, JWT_EXPIRY } = require('../config');
 
@@ -34,7 +35,9 @@ UserSchema.statics.hashPassword = function (password) {
 };
 
 UserSchema.methods.generateToken = function () {
-  return jwt.sign(this, JWT_SECRET, {
+  const user = this;
+
+  return jwt.sign({ user }, JWT_SECRET, {
     subject: this.username,
     expiresIn: JWT_EXPIRY,
     algorithm: 'HS256',
