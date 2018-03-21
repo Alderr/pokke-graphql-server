@@ -37,6 +37,7 @@ module.exports = `
 
     type CreateLog_Payload {
         _id: ID
+        logs: [Logs]    
     }
 
     input CreateUserInput {
@@ -55,8 +56,9 @@ module.exports = `
     type Mutation { 
         createUser(input: CreateUserInput!): User
         deleteUser(_id: String!): User
-        addKeyToUser(_id: String!): User
-        createLog(_id: String!, message: String!, contacts: [String]): CreateLog_Payload
+        addApiKey(_id: String!): User
+        deleteApiKey(_id: String!, apiKeyId): User
+        createLog(input: CreateLogInput!): CreateLog_Payload
     }
 
 `;

@@ -6,8 +6,21 @@ function phoneNumberCheck(str) {
   return /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(str);
 }
 
+function createContactsArr(contacts) {
+  return contacts.map((contact) => {
+    if (contact.includes('@')) {
+      return { email: contact };
+    } else if (phoneNumberCheck(contact)) {
+      return { phoneNumber: contact };
+    }
+
+    throw new Error('Not a valid contact!');
+  });
+}
+
 module.exports = {
-  Query: {
+  Query:
+  {
     users: () =>
       UserModel.find()
         .populate('apiKeys')
@@ -17,17 +30,21 @@ module.exports = {
           return users;
         }),
   },
-  Mutation: {
-    createUser: (_, { input }) => UserModel.create(input)
-      .then((response) => {
-        console.log(response);
-        return response;
-      }),
-    deleteUser: (_, { _id }) => UserModel.findByIdAndRemove(_id).then((response) => {
-      console.log(response);
-      return response;
-    }),
-    addKeyToUser: (_, { _id }) => {
+  Mutation:
+  {
+    createUser: (_, { input }) =>
+      UserModel.create(input)
+        .then((response) => {
+          console.log(response);
+          return response;
+        }),
+    deleteUser: (_, { _id }) =>
+      UserModel.findByIdAndRemove(_id)
+        .then((response) => {
+          console.log(response);
+          return response;
+        }),
+    addApiKey: (_, { _id }) => {
       /*
         > find User
         > create api key using uuid
@@ -55,35 +72,34 @@ module.exports = {
           return response;
         });
     },
-    createLog: (_, { _id, message, contacts }) => UserModel.findById(_id, 'logs')
-      .then((user) => {
-        console.log('user', user);
+    deleteApiKey: (_, { _id, apiKeyId }) => {
 
-        const newLogsObj = {
-          message,
-          contacts: contacts.map((contact) => {
-            if (contact.includes('@')) {
-              return { email: contact };
-            } else if (phoneNumberCheck(contact)) {
-              return { phoneNumber: contact };
-            }
+    },
+    createLog: (_, { input }) => {
+      const { id, message, contacts } = input;
 
-            throw new Error('Not a valid contact!');
-          }),
-        };
+      return UserModel.findById(id, 'logs')
+        .then((user) => {
+          console.log('user', user);
 
-        user.logs = [...user.logs, newLogsObj];
-        console.log('user===log', user.logs);
-        return user.save();
-      })
-      .then((response) => {
-        console.log('RESPONSE===');
-        console.log(response);
-        return response;
-      })
-      .catch((err) => {
-        console.log(err);
-        return err;
-      }),
+          const newLogsObj = {
+            message,
+            contacts: createContactsArr(contacts),
+          };
+
+          user.logs = [...user.logs, newLogsObj];
+          return user.save();
+        })
+        .then((response) => {
+          console.log('===RESPONSE===');
+          console.log(response);
+          return response;
+        })
+        .catch((err) => {
+          console.log(err);
+          return err;
+        });
+    },
   },
+
 };
