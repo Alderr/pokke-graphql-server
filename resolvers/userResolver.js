@@ -32,8 +32,12 @@ module.exports = {
   },
   Mutation:
   {
-    createUser: (_, { input }) => {
+    createUser: (_, { input }, context) => {
+      console.log('​-----------------');
+      console.log('​context', context);
+      console.log('​-----------------');
       // { firstName, lastName, username, password } = input;
+      
       const args = input;
 
       return UserModel.hashPassword(input.password)

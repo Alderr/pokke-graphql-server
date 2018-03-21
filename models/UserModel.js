@@ -44,6 +44,7 @@ UserSchema.methods.generateToken = function () {
   });
 };
 
+
 UserSchema.methods.serialize = function () {
   return {
     _id: this._id,
