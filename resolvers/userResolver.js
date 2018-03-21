@@ -60,7 +60,7 @@ module.exports = {
           return response;
         });
     },
-    addApiKey: (_, { _id }, user) => {
+    addApiKey: (_, __, user) => {
       /*
         > find User
         > create api key using uuid
@@ -89,12 +89,12 @@ module.exports = {
           return response;
         });
     },
-    deleteApiKey: (_, { _id, apiKeyId }) => {
+    deleteApiKey: (_, { apiKeyId }, user) => {
       console.log('​-----------------------------');
-      console.log('​_id, apiKeyId', _id, apiKeyId);
+      console.log('​apiKeyId', apiKeyId);
       console.log('​-----------------------------');
 
-      return UserModel.findById(_id)
+      return requireAuth(user)
         .then((user) => {
           const newApiKeysArr = user.apiKeys.filter(key => !(JSON.stringify(key).replace(/\"/g, '') === apiKeyId));
 

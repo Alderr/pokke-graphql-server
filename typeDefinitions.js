@@ -9,7 +9,7 @@ module.exports = `
     }
 
     type ApiKey {
-        _id: ID!,
+        _id: ID!
         key: String!
         usage: Int!
     }
@@ -34,6 +34,10 @@ module.exports = `
     type CreateApiKey_Payload {
         _id: ID
     }
+    
+    type Payload {
+        _id: ID
+    }
 
     type CreateLog_Payload {
         _id: ID
@@ -42,6 +46,10 @@ module.exports = `
 
     type Auth_Payload {
         authToken: String!   
+    }
+
+    type ApiKey_Payload {
+        _id: ID  
     }
 
     input SignInInput {
@@ -61,14 +69,12 @@ module.exports = `
         message: String!
         contacts: [String!]!
     }
-
-
-
+ 
     type Mutation { 
         createUser(input: CreateUserInput!): User
         deleteUser(_id: String!): User
-        addApiKey(_id: String!): User
-        deleteApiKey(_id: String!, apiKeyId: String!): User
+        addApiKey(input: String): ApiKey_Payload
+        deleteApiKey(apiKeyId: String!): ApiKey_Payload
         createLog(input: CreateLogInput!): CreateLog_Payload
 
         incrementUsage (_id: String!): ApiKey
