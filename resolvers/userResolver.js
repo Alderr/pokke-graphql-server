@@ -66,18 +66,16 @@ module.exports = {
         > create api key using uuid
         > create apiKey in model { key, user-id }
         > save user's apiKey
+        > see response & send it!
       */
 
       let userData;
-      //const { id } = requireAuth(user);
+
       return requireAuth(user)
-        .then((userObj) => {
-          return UserModel.findById(id, "apiKeys");
-        })
-        .then((user) => {
-          userData = user;
+        .then((response) => {
+          userData = response;
           const apiKey = uuidv4();
-          console.log('before new apikey ', user);
+          console.log('before new apikey ', response);
           return ApiKeyModel.create({ key: apiKey, user: userData._id });
         })
         .then((apiKey) => {
