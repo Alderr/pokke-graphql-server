@@ -65,7 +65,6 @@ module.exports = `
     }
 
     input CreateLogInput {
-        id: String!
         message: String!
         contacts: [String!]!
     }

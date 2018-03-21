@@ -115,20 +115,20 @@ module.exports = {
           return err;
         });
     },
-    createLog: (_, { input }) => {
-      const { id, message, contacts } = input;
+    createLog: (_, { input }, user) => {
+      const { message, contacts } = input;
 
-      return UserModel.findById(id, 'logs')
-        .then((user) => {
-          console.log('user', user);
+      let userData;
 
-          const newLogsObj = {
-            message,
-            contacts: createContactsArr(contacts),
-          };
+      return requireAuth(user)
+        .then((response) => {
+          userData = response;
+          console.log('user', userData);
 
-          user.logs = [...user.logs, newLogsObj];
-          return user.save();
+          const newLogsObj = { message, contacts: createContactsArr(contacts) };
+
+          userData.logs = [...userData.logs, newLogsObj];
+          return userData.save();
         })
         .then((response) => {
           console.log(response);
