@@ -1,7 +1,8 @@
 const apiKeyResolver = require('./apiKeysResolver');
 const userResolver = require('./userResolver');
+const loginResolver = require('./loginResolver');
 
-const resolvers = [apiKeyResolver, userResolver];
+const resolvers = [apiKeyResolver, userResolver, loginResolver];
 
 module.exports = resolvers.reduce((accObj, currObj) => {
   Object.keys(currObj).forEach((key) => {

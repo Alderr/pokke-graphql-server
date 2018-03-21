@@ -2,22 +2,39 @@ const UserModel = require('../models/UserModel');
 
 
 function localAuth(username, password) {
+  let tempUser;
   return UserModel.findOne({ username })
     .then((user) => {
-      if (user) {
-        if (user.validatePassword(password)) {
-          return { authToken: user.generateToken() };
-        }
+      console.log('user', user);
 
-        return new Error('Incorrect credentials.');
+      if (user) {
+        // mongoose methods + bcrypt | its a promise!
+        tempUser = user;
+        return user.validatePassword(password);
       }
 
       return new Error('Incorrect credentials.');
+    })
+    .then((verdict) => {
+      console.log('​------------------------------');
+      console.log('​localAuth -> verdict', verdict);
+      console.log('​------------------------------');
+
+      if (verdict) {
+        return tempUser.generateToken();
+      }
+
+      return new Error('Incorrect credentials.');
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
     });
 }
 
 module.exports = {
-  Query: {
+  Query: {},
+  Mutation: {
     signIn: (_, { input }, context) => {
       const { username, password } = input;
       console.log('​-----------------');
@@ -27,6 +44,4 @@ module.exports = {
       return localAuth(username, password);
     },
   },
-  Mutation: {
-  },
-}; 
+};

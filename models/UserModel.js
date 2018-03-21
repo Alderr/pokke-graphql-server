@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const { Schema } = require('mongoose');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { Schema } = require('mongoose');
 const { JWT_SECRET, JWT_EXPIRY } = require('../config');
 
 mongoose.Promise = global.Promise;
@@ -26,13 +25,15 @@ const UserSchema = new Schema({
   apiKeys: [{ type: Schema.Types.ObjectId, ref: 'ApiKeys' }],
 });
 
-UserSchema.methods.validatePassword = password => bcrypt.compare(password, this.password);
+UserSchema.methods.validatePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
-UserSchema.statics.hashPassword = password => bcrypt.hash(password, 10);
+UserSchema.statics.hashPassword = function (password) {
+  return bcrypt.hash(password, 10);
+};
 
-UserSchema.methods.generateToken = () => {
-  console.log(this);
-
+UserSchema.methods.generateToken = function () {
   return jwt.sign(this, JWT_SECRET, {
     subject: this.username,
     expiresIn: JWT_EXPIRY,
@@ -40,16 +41,17 @@ UserSchema.methods.generateToken = () => {
   });
 };
 
-
-UserSchema.methods.serialize = () => ({
-  _id: this._id,
-  username: this.username,
-  password: this.password,
-  firstName: this.firstName,
-  lastName: this.lastName,
-  log: this.log,
-  apiKeys: this.apiKeys,
-});
+UserSchema.methods.serialize = function () {
+  return {
+    _id: this._id,
+    username: this.username,
+    password: this.password,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    log: this.log,
+    apiKeys: this.apiKeys,
+  };
+};
 
 const UserModel = mongoose.model('Users', UserSchema);
 
