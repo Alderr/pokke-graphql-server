@@ -18,6 +18,7 @@ module.exports = `
         _id: ID!
         date: String!
         message: String!
+        apiKey: String!
         contacts: [Contact!]
     }
 
@@ -66,6 +67,7 @@ module.exports = `
 
     input CreateLogInput {
         message: String!
+        apiKey: String!
         contacts: [String!]!
     }
  

@@ -120,7 +120,7 @@ module.exports = {
         });
     },
     createLog: (_, { input }, user) => {
-      const { message, contacts } = input;
+      const { message, contacts, apiKey } = input;
 
       let userData;
 
@@ -129,7 +129,7 @@ module.exports = {
           userData = response;
           console.log('user', userData);
 
-          const newLogsObj = { message, contacts: createContactsArr(contacts) };
+          const newLogsObj = { message, contacts: createContactsArr(contacts), apiKey };
 
           userData.logs = [...userData.logs, newLogsObj];
           return userData.save();

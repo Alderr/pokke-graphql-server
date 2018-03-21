@@ -15,6 +15,7 @@ const UserSchema = new Schema({
     {
       date: { type: Number, default: Date.now() },
       message: { type: String },
+      apiKey: { type: String },
       contacts: [
         {
           email: { type: String },
