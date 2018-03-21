@@ -57,7 +57,7 @@ module.exports = `
         createUser(input: CreateUserInput!): User
         deleteUser(_id: String!): User
         addApiKey(_id: String!): User
-        deleteApiKey(_id: String!, apiKeyId): User
+        deleteApiKey(_id: String!, apiKeyId: String!): User
         createLog(input: CreateLogInput!): CreateLog_Payload
     }
 

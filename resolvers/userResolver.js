@@ -73,7 +73,29 @@ module.exports = {
         });
     },
     deleteApiKey: (_, { _id, apiKeyId }) => {
+      console.log('​-----------------------------');
+      console.log('​_id, apiKeyId', _id, apiKeyId);
+      console.log('​-----------------------------');
 
+      return UserModel.findById(_id)
+        .then((user) => {
+          const newApiKeysArr = user.apiKeys.filter(key => !(JSON.stringify(key).replace(/\"/g, '') === apiKeyId));
+
+          user.apiKeys = [...newApiKeysArr];
+          return user.save();
+        })
+        .then((response) => {
+          console.log(response);
+          return ApiKeyModel.findByIdAndRemove(apiKeyId);
+        })
+        .then((response) => {
+          console.log(response);
+          return response;
+        })
+        .catch((err) => {
+          console.log(err);
+          return err;
+        });
     },
     createLog: (_, { input }) => {
       const { id, message, contacts } = input;
