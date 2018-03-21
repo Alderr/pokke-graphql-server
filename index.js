@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 });
 
 // The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress(req => ({ schema, context: req })));
+app.use('/graphql', bodyParser.json(), graphqlExpress(req => ({ schema, context: req.user })));
 
 // GraphiQL, a visual editor for queries
 app.use('/', graphiqlExpress({ endpointURL: '/graphql' }));
