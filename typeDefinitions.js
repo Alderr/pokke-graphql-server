@@ -18,6 +18,7 @@ module.exports = `
     type ApiKey_Log {
         _id: ID!
         date: String!
+        subject: String!
         message: String!
         contacts: [Contact!]
     }
