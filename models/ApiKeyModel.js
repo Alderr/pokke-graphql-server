@@ -5,20 +5,21 @@ mongoose.Promise = global.Promise;
 
 const ApiKeySchema = new Schema({
   key: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'Users' },
+  user: { type: Schema.Types.ObjectId, ref: "Users" },
   usage: { type: Number, default: 0 },
   logs: [
     {
       date: { type: Number, default: Date.now() },
+      subject: { type: String },
       message: { type: String },
       contacts: [
         {
           email: { type: String },
-          phoneNumber: { type: String },
-        },
-      ],
-    },
-  ],
+          phoneNumber: { type: String }
+        }
+      ]
+    }
+  ]
 });
 
 ApiKeySchema.methods.serialize = function () {
