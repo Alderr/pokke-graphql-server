@@ -14,13 +14,13 @@ const UserSchema = new Schema({
   logs: [
     {
       date: { type: Number, default: Date.now() },
-      message: { type: String },
-      subject: { type: String },
-      apiKey: { type: String },
+      message: { type: String, required: true },
+      subject: { type: String, default: '' },
+      apiKey: { type: String, required: true },
       contacts: [
         {
-          email: { type: String },
-          phoneNumber: { type: String },
+          email: { type: String, default: '' },
+          phoneNumber: { type: String, default: '' },
         },
       ],
     },

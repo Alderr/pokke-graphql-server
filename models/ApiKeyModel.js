@@ -10,12 +10,12 @@ const ApiKeySchema = new Schema({
   logs: [
     {
       date: { type: Number, default: Date.now() },
-      subject: { type: String },
-      message: { type: String },
+      subject: { type: String, default: '' },
+      message: { type: String, default: '' },
       contacts: [
         {
-          email: { type: String },
-          phoneNumber: { type: String },
+          email: { type: String, default: '' },
+          phoneNumber: { type: String, default: '' },
         },
       ],
     },
