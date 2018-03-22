@@ -25,6 +25,7 @@ module.exports = `
     type Logs {
         _id: ID!
         date: String!
+        subject: String!
         message: String!
         apiKey: String!
         contacts: [Contact!]
@@ -76,6 +77,7 @@ module.exports = `
     input CreateLogInput {
         _id: String!
         message: String!
+        subject: String!
         apiKey: String!
         contacts: [String!]!
     }
