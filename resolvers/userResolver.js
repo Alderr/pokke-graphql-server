@@ -119,12 +119,12 @@ module.exports = {
           return err;
         });
     },
-    createLog: (_, { input }, user) => {
-      const { message, contacts, apiKey } = input;
+    createLog: (_, { input }) => {
+      const { _id, message, contacts, apiKey } = input;
 
       let userData;
 
-      return requireAuth(user)
+      return UserModel.findById(_id)
         .then((response) => {
           userData = response;
           console.log('user', userData);
