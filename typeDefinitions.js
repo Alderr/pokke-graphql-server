@@ -66,6 +66,7 @@ module.exports = `
     }
 
     input CreateLogInput {
+        _id: String!
         message: String!
         apiKey: String!
         contacts: [String!]!
