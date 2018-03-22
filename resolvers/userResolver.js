@@ -34,7 +34,7 @@ module.exports = {
   Mutation:
   {
     createUser: (_, { input }) => {
-      // { firstName, lastName, username, password } = input;
+      // input has ---> { firstName, lastName, username, password }
 
       const args = input;
 
