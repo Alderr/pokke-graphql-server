@@ -35,5 +35,8 @@ module.exports = {
           return response;
         });
     },
+    addLogToApiKey: (_, _id) => {
+
+    },
   },
 };

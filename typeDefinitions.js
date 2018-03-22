@@ -12,6 +12,14 @@ module.exports = `
         _id: ID!
         key: String!
         usage: Int!
+        logs: [ApiKey_Log!]
+    }
+
+    type ApiKey_Log {
+        _id: ID!
+        date: String!
+        message: String!
+        contacts: [Contact!]
     }
 
     type Logs {
@@ -81,6 +89,7 @@ module.exports = `
 
         incrementUsage (_id: String!): ApiKey
         resetUsage (_id: String!): ApiKey
+        addLogToApiKey (_id: String!): ApiKey
 
         signIn(input: SignInInput!): Auth_Payload
     }
