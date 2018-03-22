@@ -82,6 +82,13 @@ module.exports = `
         apiKey: String!
         contacts: [String!]!
     }
+
+    input CreateApiKey_LogInput {
+        _id: String!
+        message: String!
+        subject: String!
+        contacts: [String!]!
+    }
  
     type Mutation { 
         createUser(input: CreateUserInput!): User
@@ -92,7 +99,7 @@ module.exports = `
 
         incrementUsage (_id: String!): ApiKey
         resetUsage (_id: String!): ApiKey
-        addLogToApiKey (_id: String!): ApiKey
+        addLogToApiKey (input: CreateApiKey_LogInput!): ApiKey
 
         signIn(input: SignInInput!): Auth_Payload
     }
