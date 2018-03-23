@@ -35,8 +35,8 @@ module.exports = {
         });
     },
     addLogToApiKey: (_, { input }) => {
-      const { _id, message, subject, contact } = input;
-      const newLog = { message, subject, contact };
+      const { _id, message, subject, contact, status } = input;
+      const newLog = { message, subject, contact, status };
 
       return ApiKeyModel.findByIdAndUpdate(_id, { $push: { logs: newLog } })
         .then((response) => {

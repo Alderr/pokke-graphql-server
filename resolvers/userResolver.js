@@ -105,7 +105,7 @@ module.exports = {
         });
     },
     createLog: (_, { input }) => {
-      const { _id, message, contact, apiKey } = input;
+      const { _id, message, contact, apiKey, status } = input;
 
       let userData;
 
@@ -114,9 +114,9 @@ module.exports = {
           userData = response;
           console.log('user', userData);
 
-          const newLogsObj = { message, contact, apiKey };
+          const newLog = { message, contact, apiKey, status };
 
-          userData.logs = [...userData.logs, newLogsObj];
+          userData.logs = [...userData.logs, newLog];
           return userData.save();
         })
         .then((response) => {
