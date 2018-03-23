@@ -42,19 +42,6 @@ UserSchema.methods.generateToken = function () {
   });
 };
 
-
-UserSchema.methods.serialize = function () {
-  return {
-    _id: this._id,
-    username: this.username,
-    password: this.password,
-    firstName: this.firstName,
-    lastName: this.lastName,
-    log: this.log,
-    apiKeys: this.apiKeys,
-  };
-};
-
 const UserModel = mongoose.model('Users', UserSchema);
 
 module.exports = UserModel;
