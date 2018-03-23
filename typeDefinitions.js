@@ -32,6 +32,7 @@ module.exports = `
         message: String!
         apiKey: String!
         contact: String!
+        status: String!
     }
 
     type Query { 
