@@ -3,21 +3,6 @@ const UserModel = require('../models/UserModel');
 const ApiKeyModel = require('../models/ApiKeyModel');
 const requireAuth = require('../services/authRequired');
 
-function phoneNumberCheck(str) {
-  return /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(str);
-}
-
-function createContactsArr(contacts) {
-  return contacts.map((contact) => {
-    if (contact.includes('@')) {
-      return { email: contact };
-    } else if (phoneNumberCheck(contact)) {
-      return { phoneNumber: contact };
-    }
-
-    throw new Error('Not a valid contact!');
-  });
-}
 
 module.exports = {
   Query:
@@ -120,7 +105,7 @@ module.exports = {
         });
     },
     createLog: (_, { input }) => {
-      const { _id, message, contacts, apiKey } = input;
+      const { _id, message, contact, apiKey } = input;
 
       let userData;
 
@@ -129,7 +114,7 @@ module.exports = {
           userData = response;
           console.log('user', userData);
 
-          const newLogsObj = { message, contacts: createContactsArr(contacts), apiKey };
+          const newLogsObj = { message, contact, apiKey };
 
           userData.logs = [...userData.logs, newLogsObj];
           return userData.save();
