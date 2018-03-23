@@ -20,7 +20,9 @@ module.exports = `
         date: String!
         subject: String!
         message: String!
-        contacts: [Contact!]
+        contact: String!
+        status: String!
+        valid: Boolean!
     }
 
     type Logs {
@@ -29,12 +31,7 @@ module.exports = `
         subject: String!
         message: String!
         apiKey: String!
-        contacts: [Contact!]
-    }
-
-    type Contact {
-        email: String,
-        phoneNumber: String,
+        contact: String!
     }
 
     type Query { 
@@ -80,14 +77,14 @@ module.exports = `
         message: String!
         subject: String!
         apiKey: String!
-        contacts: [String!]!
+        contact: String!
     }
 
     input CreateApiKey_LogInput {
         _id: String!
         message: String!
         subject: String!
-        contacts: [String!]!
+        contact: String!
     }
  
     type Mutation { 
