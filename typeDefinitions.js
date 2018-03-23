@@ -78,6 +78,7 @@ module.exports = `
         subject: String!
         apiKey: String!
         contact: String!
+        status: String!
     }
 
     input CreateApiKey_LogInput {
@@ -85,6 +86,7 @@ module.exports = `
         message: String!
         subject: String!
         contact: String!
+        status: String!
     }
  
     type Mutation { 
