@@ -1,5 +1,4 @@
 const ApiKeyModel = require('../models/ApiKeyModel');
-const helpers = require('../services/helpers');
 
 module.exports = {
   Query: {
@@ -36,8 +35,8 @@ module.exports = {
         });
     },
     addLogToApiKey: (_, { input }) => {
-      const { _id, message, subject, contacts } = input;
-      const newLog = { message, subject, contacts: helpers.createContactsArr(contacts) };
+      const { _id, message, subject, contact } = input;
+      const newLog = { message, subject, contact };
 
       return ApiKeyModel.findByIdAndUpdate(_id, { $push: { logs: newLog } })
         .then((response) => {
