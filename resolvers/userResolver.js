@@ -106,19 +106,9 @@ module.exports = {
     },
     createLog: (_, { input }) => {
       const { _id, message, contact, apiKey, status } = input;
+      const newLog = { message, contact, apiKey, status };
 
-      let userData;
-
-      return UserModel.findById(_id)
-        .then((response) => {
-          userData = response;
-          console.log('user', userData);
-
-          const newLog = { message, contact, apiKey, status };
-
-          userData.logs = [...userData.logs, newLog];
-          return userData.save();
-        })
+      return UserModel.findByIdAndUpdate(_id, { $push: { logs: newLog } })
         .then((response) => {
           console.log(response);
           return response;
