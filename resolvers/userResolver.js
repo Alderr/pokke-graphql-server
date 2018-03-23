@@ -105,8 +105,8 @@ module.exports = {
         });
     },
     createLog: (_, { input }) => {
-      const { _id, message, contact, apiKey, status } = input;
-      const newLog = { message, contact, apiKey, status };
+      const { _id, subject, message, contact, apiKey, status } = input;
+      const newLog = { subject, message, contact, apiKey, status };
 
       return UserModel.findByIdAndUpdate(_id, { $push: { logs: newLog } })
         .then((response) => {
