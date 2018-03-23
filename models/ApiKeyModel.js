@@ -14,6 +14,7 @@ const ApiKeySchema = new Schema({
       message: { type: String, default: '' },
       contact: { type: String, default: '' },
       status: { type: String, default: '' },
+      valid: { type: Boolean, default: true },
     },
   ],
 });
