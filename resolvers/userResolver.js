@@ -15,6 +15,15 @@ module.exports = {
           console.log(users);
           return users;
         }),
+    user: (_, __, user) => requireAuth(user)
+      .then(user => UserModel.findById(user._id).populate('apiKeys'))
+      .then((response) => {
+        console.log('​-------------------');
+        console.log('​response', response);
+        console.log('​-------------------');
+
+        return response;
+      }),
   },
   Mutation:
   {

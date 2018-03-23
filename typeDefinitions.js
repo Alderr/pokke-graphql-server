@@ -35,8 +35,9 @@ module.exports = `
     }
 
     type Query { 
-        users: [User],
-        apiKeys: [ApiKey], 
+        users: [User]
+        user: User
+        apiKeys: [ApiKey]
     }
 
     type CreateApiKey_Payload {
