@@ -17,12 +17,8 @@ const UserSchema = new Schema({
       message: { type: String, required: true },
       subject: { type: String, default: '' },
       apiKey: { type: String, required: true },
-      contacts: [
-        {
-          email: { type: String, default: '' },
-          phoneNumber: { type: String, default: '' },
-        },
-      ],
+      contact: { type: String, default: '' },
+      status: { type: String, default: '' },
     },
   ],
   apiKeys: [{ type: Schema.Types.ObjectId, ref: 'ApiKeys' }],
