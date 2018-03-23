@@ -33,7 +33,8 @@ UserSchema.statics.hashPassword = function (password) {
 };
 
 UserSchema.methods.generateToken = function () {
-  const user = this;
+  const { _id, firstName, lastName } = this;
+  const user = { _id, firstName, lastName };
 
   return jwt.sign({ user }, JWT_SECRET, {
     subject: this.username,
